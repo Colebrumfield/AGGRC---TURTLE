@@ -4,3 +4,82 @@
 .save-option{display:flex;align-items:center;gap:9px;line-height:1.5}.save-option input{width:18px;height:18px;min-height:18px;flex-shrink:0;accent-color:var(--green)}#file-status{overflow-wrap:anywhere;padding:10px 12px;background:#f2f7f6;border-radius:7px;margin-top:8px}
 
 .firmware-panel{margin-top:22px}.firmware-body{padding:0 24px 24px;max-width:760px}.firmware-body button{margin:18px 0 10px}.firmware-body progress{display:block;width:100%;height:18px;margin:10px 0}.firmware-body input[type=file]{font-size:14px}
+
+/* TURTLE — consistent neutral surfaces; channel colors identify data only. */
+:root{font-family:"Segoe UI",Arial,sans-serif;color:#24313c;background:#eef1f4;--green:#2466bd;--blue:#ba4056;--border:#d9dfe5;--ink:#24313c;--muted:#5c6874}
+body{background:#eef1f4}
+header{position:relative;isolation:isolate;min-height:200px;padding:40px max(28px,calc((100vw - 1280px)/2));background:#203344;border-bottom:1px solid #324b60;overflow:hidden}
+header::after{content:"";position:absolute;inset:0 0 0 45%;background:url("./turtle-field.svg?v=2") right center/680px 250px no-repeat;z-index:-1;pointer-events:none}
+.mark{display:none}
+.brand strong{display:block;font-size:46px;letter-spacing:.15em;line-height:1.1;font-weight:800}
+.brand .subtitle{color:#c5d2dd;font-size:16px;letter-spacing:.04em;margin-top:12px;text-align:center}
+main{max-width:1336px;padding-top:28px}
+.panel{background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:none}
+.connection{padding:20px 25px;border-left:1px solid var(--border)}
+.eyebrow{color:#5c6874;font-size:11px;letter-spacing:.14em;font-weight:750}
+h1{font-size:23px;letter-spacing:-.025em;margin-bottom:2px}
+h2{font-size:17px;font-weight:700;letter-spacing:-.015em}
+p,.small{color:var(--muted)}
+button,input,select{border-radius:4px}
+button{font-weight:650;transition:background .15s,border-color .15s}
+.primary{background:#203344;border-color:#203344;color:#fff}
+.primary:hover:not(:disabled){background:#304c62;border-color:#304c62}
+.secondary{background:#fff;color:var(--ink);border-color:#bdc7d0}
+.secondary:hover:not(:disabled){background:#f1f4f7;border-color:#889aa9}
+button:disabled{opacity:1;background:#edf0f3;color:#74808c;border-color:#dde3e8;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #2466bd;outline-offset:3px}
+.notice{padding:14px 4px 18px;color:var(--muted)}
+.notice.error{color:#a02938}
+.workspace{grid-template-columns:minmax(0,1fr) 310px;gap:22px}
+.channels{gap:18px}
+.channel{padding:22px 24px;border-top:3px solid var(--green)}
+.channel:nth-child(2){border-top-color:var(--blue)}
+.channel h2{color:var(--ink)}
+.channel-status{font-size:11px;color:var(--muted)}
+.channel-name{background:transparent;border-radius:0;border-color:transparent;border-bottom-color:#d9dfe5;padding:8px 0;font-size:16px}
+.channel-name:hover:not(:disabled){border-bottom-color:#889aa9}
+.channel-name::placeholder{color:#6b7783}
+.reading{font-family:Consolas,"Liberation Mono",monospace;font-size:clamp(38px,4.2vw,58px);font-weight:600;letter-spacing:-.06em;margin-top:19px;color:var(--green)}
+.channel:nth-child(2) .reading{color:var(--blue)}
+.unit{font-family:"Segoe UI",sans-serif;font-size:23px;color:#63717e;margin-left:12px}
+.channel p{font-size:13px}
+.swatch{width:10px;height:10px;border-radius:2px}
+.chart{padding:24px}
+.plot{margin-top:22px;background:#fff}
+.plot svg text{fill:#5c6874;font-size:13px}
+#graph path[stroke="#11675a"]{stroke:var(--green)}
+#graph circle[fill="#11675a"]{fill:var(--green)}
+#graph path[stroke="#356ac3"]{stroke:var(--blue)}
+#graph circle[fill="#356ac3"]{fill:var(--blue)}
+#graph line{stroke:#e1e6ec}
+#chart-empty{font-weight:600;color:#3c4b58}
+#chart-empty span{color:#657380;font-weight:400;max-width:340px;line-height:1.6}
+.badge{background:#f1f4f7;color:#586978;border:1px solid #d9dfe5;border-radius:3px;font-size:10px;letter-spacing:.1em}
+.chart-footer{border-color:#e1e6ec;color:#5c6874;margin-top:16px;padding-top:15px}
+.controls{padding:24px}
+.controls h2{font-size:21px}
+label{font-size:13px;font-weight:600;color:#42515f}
+input,select{background:#fff;border-color:#bdc7d0;color:#24313c}
+.session-stats{padding:17px 0;margin:22px 0;border-top:1px solid #e1e6ec;border-bottom:1px solid #e1e6ec}
+.session-stats span{text-transform:uppercase;letter-spacing:.1em;font-size:10px;color:#5c6874}
+.session-stats strong{font-family:Consolas,"Liberation Mono",monospace;font-size:28px;color:#24313c}
+#record.danger:not(:disabled){background:#a52f3f!important;border-color:#a52f3f}
+.settings{border-color:#e1e6ec}
+.settings button{margin-top:12px}
+#reset-faults{margin-top:0}
+#file-status{background:#f1f4f7;color:#42515f;border-radius:3px}
+#file-status:empty{display:none}
+.saved{padding:24px}
+.saved>.section-heading{align-items:flex-start}
+.saved .section-heading p{max-width:810px}
+.session-row{border-color:#e1e6ec}
+.session-state{color:#42515f}
+.firmware-panel{background:#fff}
+summary{color:#24313c;font-weight:650}
+.firmware-body progress{accent-color:#203344}
+footer{border-top:1px solid #d9dfe5;margin-top:22px;padding-top:20px;color:#5c6874}
+.save-error{color:#a02938!important}
+@media(min-width:1500px){header::after{right:calc((100vw - 1336px)/2)}}
+@media(max-width:1100px){.workspace{grid-template-columns:1fr}.controls{display:grid;grid-template-columns:1fr 1fr;gap:28px}.settings{margin:0;padding:0 0 0 28px;border-top:0;border-left:1px solid #e1e6ec}}
+@media(max-width:700px){header{min-height:164px;padding:32px 22px}.brand strong{font-size:34px}.brand .subtitle{font-size:13px}header::after{left:55%;right:-90px;background-size:420px auto;opacity:.55}.channels{grid-template-columns:1fr}.reading{font-size:48px}.controls{display:block}.settings{border-left:0;border-top:1px solid #e1e6ec;padding:24px 0 0;margin-top:24px}.connection{padding:20px;flex-direction:column;align-items:flex-start}.saved .section-heading{flex-direction:column;align-items:flex-start}.channel{padding:20px}.session-row{flex-direction:column;align-items:flex-start}.session-actions{width:100%;flex-wrap:wrap}.chart-footer{flex-wrap:wrap}.connection-actions{width:100%}.connection-actions button{flex:1}main{padding:16px}.chart{padding:16px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
