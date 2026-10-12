@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 250" fill="none">
+  <!-- Decorative field sketch. No plotted curves represent measured data. -->
+  <g stroke="#587186" stroke-width="1" opacity=".5">
+    <path d="M25 38H650M25 88H650M25 138H650M25 188H650M25 238H650M80 15V240M180 15V240M280 15V240M380 15V240M480 15V240M580 15V240"/>
+    <path d="M25 218C95 173 105 202 160 169S235 199 291 166M25 230C98 190 120 223 174 190S241 214 290 181M568 56c25-18 42-4 64-20M568 68c25-18 42-4 64-20"/>
+  </g>
+  <g transform="translate(431 126) rotate(-18)" stroke="#b8cddb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-39-51C-59-96-102-106-108-91c-5 14 30 37 45 61M39-51C59-96 102-106 108-91c5 14-30 37-45 61" fill="#304c62"/>
+    <path d="M-47 48c-28 9-49 29-39 38 8 8 27-1 48-20M47 48c28 9 49 29 39 38-8 8-27-1-48-20" fill="#304c62"/>
+    <path d="M-16-65v-12c0-32 32-32 32 0v12M-6 78l6 14 6-14" fill="#304c62"/>
+    <path d="M0-69c40 0 66 32 65 72-1 42-33 76-65 76S-64 45-65 3c-1-40 25-72 65-72Z" fill="#253f54"/>
+    <path d="M0-57 26-35 22 0 30 33 0 65-30 33-22 0-26-35ZM-26-35-48-36M26-35 48-36M-22 0-56 2M22 0 56 2M-30 33-48 44M30 33 48 44M0-57v-12M0 65v14"/>
+    <path d="M-26-35H26M-22 0H22M-30 33H30" stroke="#718fa6" stroke-width="2"/>
+  </g>
+</svg>
