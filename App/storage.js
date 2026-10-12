@@ -42,11 +42,31 @@ export class RecordingStore {
 export function csvRows(rows) {
   return rows.map(r=>[r.elapsed.toFixed(3),r.values[0]??'',r.values[1]??''].join(',')+'\r\n').join('');
 }
+export function localRecordingTime(value) {
+  const d=new Date(value), pad=n=>String(n).padStart(2,'0');
+  if(Number.isNaN(d.getTime()))throw new Error('Invalid recording date');
+  return `${pad(d.getMonth()+1)}-${pad(d.getDate())}-${pad(d.getFullYear()%100)}_${pad(d.getHours())}-${pad(d.getMinutes())}`;
+}
+export async function createRecordingDirectory(root, session) {
+  const create=async()=>{
+    const base=`TURTLE_${session.localStartedAt||localRecordingTime(session.startedAt)}`;
+    const used=new Set();
+    for await(const [name] of root.entries())used.add(name);
+    let name=base, suffix=2;
+    while(used.has(name))name=`${base}_${suffix++}`;
+    return root.getDirectoryHandle(name,{create:true});
+  };
+  // Serialize naming across TURTLE tabs so simultaneous runs stay separate.
+  return globalThis.navigator?.locks
+    ? navigator.locks.request('turtle-recording-folder',create) : create();
+}
 export function sessionCSV(session, rows) {
   function cell(value){let s=String(value??'');if(/^[\s]*[=+\-@]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
   const headers=['Elapsed Time (s)',...Array.from({length:2},(_,i)=>
     `Thermocouple ${i+1}${session.names?.[i]?' - '+session.names[i]:''} (°C)`)];
   // BOM helps Excel recognize UTF-8 channel names and the degree symbol.
-  return '\uFEFF'+['Date Created,'+cell(session.startedAt)+',',
+  const local=session.localStartedAt||localRecordingTime(session.startedAt);
+  const dateLabel=local.replace('_',' ').replace(/-(\d{2})$/,':$1');
+  return '\uFEFF'+['Date Created,'+cell(dateLabel)+',',
     'Session Name,'+cell(session.name)+',',',,',',,',headers.map(cell).join(',')].join('\r\n')+'\r\n'+csvRows(rows);
 }

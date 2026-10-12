@@ -1,4 +1,4 @@
-import {sessionCSV,csvRows} from './storage.js?v=8';
+import {sessionCSV,csvRows} from './storage.js?v=local-date-1';
 
 // A folder grant lets us recover from a locked CSV without another file picker.
 // Every continuation is a complete recording, so users never need to merge files.

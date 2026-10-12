@@ -1,7 +1,7 @@
 import {parseIntelHex,flashNano,firmwareModuleURL} from './firmware-updater.js?v=8';
-import {LocalCSV} from './local-csv.js?v=8';
+import {LocalCSV} from './local-csv.js?v=local-date-1';
 import {parsePacket,createLineDecoder,configCommand,faultLabel} from './protocol.js?v=8';
-import {RecordingStore,sessionCSV} from './storage.js?v=8';
+import {RecordingStore,sessionCSV,localRecordingTime,createRecordingDirectory} from './storage.js?v=local-date-1';
 const $=id=>document.getElementById(id), clock=()=>performance.now(), store=new RecordingStore();
 let port=null,reader=null,readTask=null,connected=false,busy=false,closing=false,writing=false;
 let latestFaults=[null,null],deviceSeq=null,deviceMs=null,deviceElapsed=0,recordDeviceStart=null,droppedPackets=0;
@@ -168,12 +168,12 @@ async function startRecording(){
   if(localFile?.error&&!downloadedFallback){message('Save or download the previous recording before starting another.',true);return;}
   transition=true;render();
   const startedAt=new Date().toISOString();
-  const session={id:crypto.randomUUID(),name:$('session-name').value.trim()||`Recording · ${new Date().toLocaleString()}`,startedAt,names:[...names],...requested,count:0,durationMs:0,status:'open'};
+  const session={id:crypto.randomUUID(),name:$('session-name').value.trim()||`Recording · ${new Date().toLocaleString()}`,startedAt,localStartedAt:localRecordingTime(startedAt),names:[...names],...requested,count:0,durationMs:0,status:'open'};
   let nextFile=null;
   {
     try{
       const root=await window.showDirectoryPicker({mode:'readwrite',id:'turtle-recordings'});
-      const folder=await root.getDirectoryHandle(`TURTLE_${startedAt.replace(/[:.]/g,'-')}_${session.id.slice(0,8)}`,{create:true});
+      const folder=await createRecordingDirectory(root,session);
       nextFile=new LocalCSV(folder,session);
       await nextFile.save([]);
     }catch(e){transition=false;message(e.name==='AbortError'?'Recording canceled. No new samples recorded.':'Could not open the recording folder. Choose another folder and allow access to start recording.',e.name!=='AbortError');render();return;}
